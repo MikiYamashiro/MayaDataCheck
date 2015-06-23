@@ -5,9 +5,9 @@ def getList(typestr):
     return cmds.ls(type=typestr)
     
 
-def searchUVSet(multiple_UV_set, not_UV_set):    
+def searchUVSet(mesh_list, multiple_UV_set, not_UV_set):    
     # get mesh list    
-    for mesh in getList('mesh'):
+    for mesh in mesh_list:
         uvset_list = cmds.polyUVSet(mesh, query=True, allUVSets=True)
         uvset_count = len(uvset_list)
         if uvset_count == 1:
@@ -25,7 +25,9 @@ def searchUVSet(multiple_UV_set, not_UV_set):
 # Main Function
 def run():
     multiple_UV_set = {}
-    not_UV_set = []    
-    searchUVSet(multiple_UV_set, not_UV_set)
+    not_UV_set = []
+    
+    mesh_list = getList("mesh")
+    searchUVSet(mesh_list, multiple_UV_set, not_UV_set)
     
     return multiple_UV_set, not_UV_set
